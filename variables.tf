@@ -78,10 +78,9 @@ variable "name" {
   }
 }
 
-# This is required for most resource modules
-variable "resource_group_name" {
+variable "parent_id" {
   type        = string
-  description = "The resource group where the resources will be deployed."
+  description = "The resource ID of the resource group in which to create the resource."
 }
 
 variable "custom_rules" {
@@ -153,7 +152,7 @@ variable "lock" {
   description = <<DESCRIPTION
 Controls the Resource Lock configuration for this resource. The following properties can be specified:
 
-- `kind` - (Required) The type of lock. Possible values are `\"CanNotDelete\"` and `\"ReadOnly\"`.
+- `kind` - (Required) The type of lock. Possible values are `"CanNotDelete"` and `"ReadOnly"`.
 - `name` - (Optional) The name of the lock. If not specified, a name will be generated based on the `kind` value. Changing this forces the creation of a new resource.
 DESCRIPTION
 
@@ -239,20 +238,4 @@ variable "tags" {
   type        = map(string)
   default     = null
   description = "(Optional) Tags of the resource."
-}
-
-variable "timeouts" {
-  type = object({
-    create = optional(string)
-    delete = optional(string)
-    read   = optional(string)
-    update = optional(string)
-  })
-  default     = null
-  description = <<DESCRIPTION
- - `create` - (Defaults to 30 minutes) Used when creating the Web Application Firewall Policy.
- - `delete` - (Defaults to 30 minutes) Used when deleting the Web Application Firewall Policy.
- - `read` - (Defaults to 5 minutes) Used when retrieving the Web Application Firewall Policy.
- - `update` - (Defaults to 30 minutes) Used when updating the Web Application Firewall Policy.
-DESCRIPTION
 }
